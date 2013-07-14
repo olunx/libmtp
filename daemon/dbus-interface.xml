@@ -4,8 +4,9 @@
 
 <!--
  DBus Interface to libmtp
-
+ 
  Copyright (C) 2013 Philip Langdale <philipl@overt.org>
+ Copyright (C) 2013 Philipp Schmidt <philschmidt@gmx.net>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -24,8 +25,335 @@
 -->
 
 <node name="/" xmlns:doc="http://www.freedesktop.org/dbus/1.0/doc.dtd">
-  <interface name='org.libmtp'>
 
-  </interface>
+	<!-- org.libmtp.mtpd.Devices:
+		@short_description: MTP device access API
+
+		This D-Bus interface is used to access MTP devices.
+	-->
+	<interface name="org.libmtp.mtpd.device">
+	
+		<!-- listDevices: The currently discovered and connected devices in the deamon.
+			@devices: A list of the currently accessible devices represented as an array containing structs with the deviceID, Modelname and Friendlyname.
+		-->
+		<method name="listDevices">
+			<arg direction="out" type="a(iss)" name="devices" />
+		</method>
+		
+		<!-- setFriendlyname: Rename the device
+			@deviceID: The id of the device for which to set the name
+			@name: The string the Friendlyname property shall be set to
+		-->
+		<method name="setFriendlyname">
+			<arg direction="in" type="i" name="deviceID" />
+			<arg direction="in" type="s" name="name" />
+		</method>
+		
+		<!-- listStorages: The storages for a device with the given deviceID.
+			@deviceID: The id of the device for which to get the storages
+			@storages: A list of the storages found on the device. The result is presented as an array containing a struct with the storageID, StorageDescription and VolumeIdentifier.
+		-->
+		<method name="listStorages">
+			<arg direction="in" type="i" name="deviceID" />
+			<arg direction="out" type="a(iss)" name="storages" />
+		</method>
+		
+		<!-- getMetadataForDevice: The metadata for a device with the given deviceID.
+			@deviceID: The id of the device for which to get the metadata
+			@params: TODO
+		-->
+		<method name="getMetadataForDevice">
+			<arg direction="in"  type="i" name="deviceID" />
+			
+			<arg direction="out" type="s" name="modelName" />
+			<arg direction="out" type="s" name="friendlyName" />
+			<arg direction="out" type="(ii)" name="usbBusDev" />
+			<arg direction="out" type="i" name="vendorID" />
+			<arg direction="out" type="s" name="vendorName" />
+			<arg direction="out" type="i" name="productID" />
+			<arg direction="out" type="s" name="productName" />
+			<arg direction="out" type="i" name="deviceFlags" />
+			<arg direction="out" type="(iiiiiiii)" name="defaultFolders" />
+			<arg direction="out" type="a(sii)" name="deviceExtensions" />
+		</method>
+		
+		<!-- getMetadataForStorage: The metadata for a device with the given deviceID.
+			@deviceID: The id of the device which holds the storage
+			@storageID: The id of the device for which to get the metadata
+			@params: TODO
+		-->
+		<method name="getMetadataForStorage">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="storageID" />
+			
+			<arg direction="out" type="s" name="storageDescription" />
+			<arg direction="out" type="s" name="volumeIdentifier" />
+			<arg direction="out" type="n" name="storageType" />
+			<arg direction="out" type="n" name="filesystemType" />
+			<arg direction="out" type="n" name="accessCapability" />
+			<arg direction="out" type="x" name="maxCapacity" />
+			<arg direction="out" type="x" name="freeSpaceInBytes" />
+			<arg direction="out" type="x" name="freeSpaceInObjects" />
+		</method>
+		
+		<!-- formatStorage: Deletes all data on a storage on a device by formatting it.
+			@deviceID: The id of the device which holds the storage
+			@storageID: The id of the storage to format
+		-->
+		<method name="formatStorage">
+			<arg direction="in" type="i" name="deviceID" />
+			<arg direction="in" type="i" name="storageID" />
+		</method>
+		
+		<!-- getBatteryLevel: The storages for a device with the given deviceID.
+			@deviceID: The id of the device for which to get the storages
+			@result: 0 for success, else failure, probably because the underlying property is not supported
+			@currentLevel: The current battery level
+			@maximumLevel: The maximum battery level
+		-->
+		<method name="getBatteryLevel">
+			<arg direction="in" type="i" name="deviceID" />
+			
+			<arg direction="out" type="i" name="result" />
+			<arg direction="out" type="y" name="currentLevel" />
+			<arg direction="out" type="y" name="maximumLevel" />
+		</method>
+		
+		<!-- TODO
+			* LIBMTP_Get_String_From_Object
+			* LIBMTP_Get_u64_From_Object
+			* LIBMTP_Get_u32_From_Object
+			* LIBMTP_Get_u16_From_Object
+			* LIBMTP_Get_u8_From_Object
+			* LIBMTP_Set_Object_String
+			* LIBMTP_Set_Object_u32
+			* LIBMTP_Set_Object_u16
+			* LIBMTP_Set_Object_u8
+			* LIBMTP_Get_Property_Description
+			* LIBMTP_Is_Property_Supported
+			* LIBMTP_Get_Allowed_Property_Values
+		-->
+
+	</interface>
+
+	<!-- org.libmtp.mtpd.Files:
+		@short_description: MTP file access API
+
+		This D-Bus interface offers the LIBMTP file management API.
+	-->
+	<interface name="org.libmtp.mtpd.file">
+	<!-- TODO
+		LIBMTP_Get_Filelisting
+	-->
+
+		<!--
+			getFilesAndFolders:
+			@deviceID:	The id of the device wich contains the requested file.
+			@deviceID:	The id of the requested file.
+			@result:	The result of the operation. 0 if successful, else not.
+			@listFileStructs:	A list of found files. May be empty if no files were found and no error was reported. The struct follows the
+			LIBMTP_file_struct definitions with some exceptions:
+				* item_id: unchanged
+				* parent_id: unchanged
+				* storage_id: unchanged
+				* filename: represented as string
+				* filesize: unchanged
+				* modificationsdate: represented as an int64
+				* filetype: converted to a mime-string
+				* next: omitted as it is not necessary in a list
+		-->
+		<method name="getFilesAndFolders">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="fileID" />
+			
+			<arg direction="out" type="i" name="result" />
+			<arg direction="out" type="a(iiisxxs)" name="listFileStructs" />
+		</method>
+
+		<!--
+			getFileToFileDescriptor:
+			@deviceID:	The id of the device which has the file
+			@fileID:	The ID of the file on the device to be copied to the FD
+			@fileDescriptorTarget:	The unix file descriptor to copy to
+			@transactionID:	Custom ID to be used with the device ID for watching the transaction progress
+			
+			@result:	The result code for the operation
+		-->
+		<method name="getFileToFileDescriptor">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="fileID" />
+			<arg direction="in"  type="h" name="fileDescriptorTarget" />
+			<arg direction="in"  type="i" name="transactionID" />
+			
+			<arg direction="out" type="i" name="result" />
+		</method>
+
+		<!--
+			getFileFromFileDescriptor:
+			@deviceID:	The id of the device which has the file
+			@fileDescriptorSource:	The unix file descriptor to copy from
+			@transactionID:	Custom ID to be used with the device ID for watching the transaction progress
+			
+			@result:	The result code for the operation
+			@fileID:	The fileID of the copied file on the device
+		-->
+		<method name="getFileFromFileDescriptor">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="h" name="fileDescriptorSource" />
+			<arg direction="in"  type="i" name="transactionID" />
+			
+			<arg direction="out" type="i" name="result" />
+			<arg direction="out" type="i" name="newFileID" />
+		</method>
+
+		<!--
+			copyProgress: Signal is emitted when a progress update has been issued by LIBMTP. Applies only to copy operations.
+			@deviceOD:	The id of the device of the transaction
+			@transactionID:	The custom id of the transaction
+			@transferredBytes:	Currently transferred bytes
+			@totalBytes:	Total number of bytes to transfer
+		-->
+		<signal name="copyProgress">
+			<arg type="i" name="deviceID"/>
+			<arg type="i" name="transactionID"/>
+			<arg type="x" name="transferredBytes"/>
+			<arg type="x" name="totalBytes"/>
+		</signal>
+
+		<!--
+			getFileMetadata:
+			@deviceID:	The id of the device which has the file
+			@fileID:	The fileID of file on the device
+			
+			@result:	The result code for the operation
+			@parentID: fileID of the parent of this file
+			@storageID: ID of the storage the file is on
+			@name: Actual name of the file
+			@size: Size of the file on the device
+			@modificationsdate: Last modification date (time_t represented as an
+			int64)
+			@mimetype: MIME-type of the file
+		-->
+		<method name="getFileMetadata">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="fileID" />
+			
+			<arg direction="out" type="i" name="result" />
+			<arg direction="out" type="i" name="parentID" />
+			<arg direction="out" type="i" name="storageID" />
+			<arg direction="out" type="s" name="name" />
+			<arg direction="out" type="x" name="size" />
+			<arg direction="out" type="x" name="modificationdate" />
+			<arg direction="out" type="s" name="mimetype" />
+		</method>
+		
+		<!--
+			setFileName:
+			@deviceID:	The id of the device wich contains the file.
+			@fileID:	The id of the file.
+			@newName:	The new name of the file
+			@result:	The result of the operation. 0 if successful, else not.
+		-->
+		<method name="setFileName">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="fileID" />
+			<arg direction="in"  type="s" name="newName" />
+			
+			<arg direction="out" type="i" name="result" />
+		</method>
+		
+		<!--
+			setFileName:
+			@deviceID:	The id of the device wich contains the file.
+			@fileID:	The id of the file.
+			@result:	The result of the operation. 0 if successful, else not.
+			@thumbnail:	The thumbnail as a byte-array
+		-->
+		<method name="getThumbnail">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="fileID" />
+			
+			<arg direction="out" type="i" name="result" />
+			<arg direction="out" type="ab" name="thumbnail" />
+		</method>
+		
+	</interface>
+	
+	<!-- org.libmtp.mtpd.folder:
+		@short_description: MTP folder management API
+
+		This D-Bus interface is used to manage folders on a MTP device.
+	-->
+	<interface name="org.libmtp.mtpd.folder">
+	<!-- To be defined
+		LIBMTP_Get_Folder_List
+		LIBMTP_Get_Folder_List_For_Storage
+	-->
+	
+		<!--
+			createFolder:
+			@deviceID:	The id of the device wich contains the file.
+			@parentID:	The id of the parent folder.
+			@name:	The name of the new folder
+			@result:	The result of the operation. 0 if successful, else not.
+			
+			DEVELOPER INFO (remove later): storageID can be extracted from the parent folder
+		-->
+		<method name="createFolder">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="parentID" />
+			<arg direction="in"  type="s" name="name" />
+			
+			<arg direction="out" type="i" name="result" />
+		</method>
+		
+		<!--
+			setFolderName:
+			@deviceID:	The id of the device wich contains the file.
+			@folderID:	The id of the file.
+			@newName:	The new name of the file
+			@result:	The result of the operation. 0 if successful, else not.
+		-->
+		<method name="setFolderName">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="folderID" />
+			<arg direction="in"  type="s" name="newName" />
+			
+			<arg direction="out" type="i" name="result" />
+		</method>
+		
+	</interface>
+	
+	<!-- org.libmtp.mtpd.object:
+		@short_description: MTP object access API
+
+		This D-Bus interface offers the LIBMTP object management API.
+	-->
+	<interface name="org.libmtp.mtpd.object">
+	<!-- TODO
+		LIBMTP_GetPartialObject
+		LIBMTP_SendPartialObject
+		LIBMTP_BeginEditObject
+		LIBMTP_EndEditObject
+		LIBMTP_TruncateObject
+		
+		!!! LIBMTP_Set_Object_Filename is deprecated, will not be used (Use 
+		setFilename/setFoldername etc. instead)
+	-->
+	
+		<!--
+			deleteObject:
+			@deviceID:	The id of the device wich contains the object.
+			@objectID:	The id of the object.
+			@result:	The result of the operation. 0 if successful, else not.
+		-->
+		<method name="deleteObject">
+			<arg direction="in"  type="i" name="deviceID" />
+			<arg direction="in"  type="i" name="objectID" />
+			
+			<arg direction="out" type="i" name="result" />
+		</method>
+		
+	</interface>
 </node>
 

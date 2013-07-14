@@ -17,8 +17,11 @@ BUILT_SOURCES = $(dbus_built_sources)
 
 $(dbus_built_sources) : Makefile.am dbus-interface.xml
 	$(AM_V_GEN) gdbus-codegen                               \
-                --interface-prefix org.libmtp.                  \
-                --c-namespace MTP                               \
+                --interface-prefix org.libmtp.mtpd.             \
+                --c-namespace MTPD                              \
+                --c-generate-object-manager                     \
+                --generate-c-code mtp-dbus                      \
+                --generate-docbook generated-docs               \
                 --generate-c-code mtp-dbus                      \
                 $(srcdir)/dbus-interface.xml                    \
                 $(NULL)

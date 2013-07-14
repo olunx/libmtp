@@ -20,8 +20,59 @@
  */
 
 
-int
-main (int argc, char *argv[])
-{
-  return 0;
+#include <unistd.h>
+#include <signal.h>
+#include <syslog.h>
+
+void
+signal_handler(int sig) {
+    
+    switch(sig) {
+        case SIGHUP:
+            // We can safely ignore this as we are a daemon
+            break;
+            
+        case SIGTERM:
+        case SIGQUIT:
+            // Graceful shutdown
+            
+            //TODO
+            
+            break;
+            
+        default:
+            // Don't react on any other signals
+            break;
+    }
 }
+
+int
+main(int argc, char **argv) {
+    
+    // Set up signal handlers
+    signal(SIGHUP, signal_handler);
+    signal(SIGTERM, signal_handler);
+    signal(SIGINT, signal_handler);
+    signal(SIGQUIT, signal_handler);
+    
+    openlog( "LIBMTP_daemon",
+             LOG_PID | LOG_CONS | LOG_NDELAY, LOG_DAEMON );
+    
+    syslog(LOG_INFO, "Daemoninsing");
+    
+    int daemon_err = daemon(0, 0);
+    
+    if (daemon_err < 0)
+        syslog(LOG_ERR, "Error daemonising");
+    
+    /*
+     * Set up the actual stuff. E.g. dbus service, udev service, init connected devices (if any)
+     */
+    
+    pause();
+    
+    closelog();
+    
+    return 0;
+}
+
