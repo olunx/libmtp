@@ -1,5 +1,10 @@
 /**
  * \file udev_listener.h
+ * \short Definition of the udev listener
+ * 
+ * Header file of the thread listening to udev for new or removed 
+ * devices. Uses callbacks to inform the daemon about them if they are 
+ * indeed MTP devices.
  *
  * Copyright (C) 2013 Philipp Schmidt <philschmidt@gmx.net>
  *

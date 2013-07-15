@@ -10,6 +10,7 @@ INCLUDES = \
 libraries = \
         $(top_builddir)/src/libmtp.la \
         $(GLIB_LIBS)                 \
+        -ludev
         $(NULL)
 
 dbus_built_sources = mtp-dbus.c mtp-dbus.h
@@ -21,14 +22,12 @@ $(dbus_built_sources) : Makefile.am dbus-interface.xml
                 --c-namespace MTPD                              \
                 --c-generate-object-manager                     \
                 --generate-c-code mtp-dbus                      \
-                --generate-docbook generated-docs               \
-                --generate-c-code mtp-dbus                      \
                 $(srcdir)/dbus-interface.xml                    \
                 $(NULL)
 
 sbin_PROGRAMS = mtpd
 
-mtpd_SOURCES = mtpd.c udev_listener.c
+mtpd_SOURCES = mtpd.c udev_listener.c dbus_service.c mtp_manager.c
 mtpd_LDADD = $(libraries)
 
 # D-BUS service file

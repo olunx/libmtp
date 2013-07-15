@@ -1,5 +1,10 @@
 /**
  * \file udev_listener.c
+ * \short Implementation of the udev listener
+ * 
+ * Implementation of the thread listening to udev for new or removed 
+ * devices. Uses callbacks to inform the daemon about them if they are 
+ * indeed MTP devices.
  *
  * Copyright (C) 2013 Philipp Schmidt <philschmidt@gmx.net>
  *
@@ -30,19 +35,20 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include <glib.h>
+#include <glib-2.0/glib.h>
+#include <syslog.h>
 
-struct device_ident_t
+typedef struct 
 {
     int busnum;
     int devnum;
-};
+} device_ident_t;
 
-struct callbacks_t
+typedef struct
 {
-    const MTPD_device_added_t device_added_callback;
-    const MTPD_device_removed_t device_removed_callback;
-};
+    MTPD_device_added_t device_added_callback;
+    MTPD_device_removed_t device_removed_callback;
+} callbacks_t;
 
 pthread_t thread;
 
@@ -61,7 +67,7 @@ void MTPD_run_udev_listener(void *arg)
 
     if (!udev)
     {
-        stderr << "Can't create udev";
+        syslog(LOG_ERR, "Can't create udev");
         return;
     }
 
@@ -93,11 +99,9 @@ void MTPD_run_udev_listener(void *arg)
         {
             dev = udev_monitor_receive_device(mon);
 
-            device_identificator ident;
             const char* action = udev_device_get_action(dev);
-
+            
             device_ident_t ident;
-
             ident.busnum = atoi(udev_device_get_property_value(dev, "BUSNUM"));
             pthread_t thread;
             ident.devnum = atoi(udev_device_get_property_value(dev, "DEVNUM"));
@@ -108,15 +112,15 @@ void MTPD_run_udev_listener(void *arg)
                 if (isMtpDevice == 1)
                 {
                     // Add to internal device list
-                    g_array_append_vals(ident_list, ident);
+                    g_array_append_vals(ident_list, &ident, sizeof(device_ident_t*));
 
                     callbacks->device_added_callback( ident.busnum, ident.devnum );
                 }
             }
             if (strcmp("remove", action) == 0)
-            {   my_struct* foo = (my_struct*)arg;
-                int device_index = -1;
-                for ( int i = 0; i < ident_list->len; i++ )
+            {
+                int device_index = -1, i;
+                for ( i = 0; i < ident_list->len; i++ )
                 {
                     device_ident_t current = g_array_index( ident_list, device_ident_t, i );
 
@@ -129,7 +133,7 @@ void MTPD_run_udev_listener(void *arg)
 
                 if (device_index >= 0)
                 {
-                    g_array_remove_index(device_index);
+                    g_array_remove_index(ident_list, device_index);
                     callbacks->device_removed_callback(ident.busnum, ident.devnum);
                 }
             }
@@ -138,7 +142,7 @@ void MTPD_run_udev_listener(void *arg)
         }
     }
 
-    g_array_free( ident_list );
+    g_array_free( ident_list, false );
 }
 
 void MTPD_start_udev_listener(const MTPD_device_added_t device_added_callback, const MTPD_device_removed_t device_removed_callback)

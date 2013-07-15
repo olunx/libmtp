@@ -1,5 +1,10 @@
 /**
  * \file mtpd.c
+ * \short Main program for the daemon
+ * 
+ * Initializes the actual daemon. Sets up the udev, dbus and mtp
+ * managing parts and then listens to signals to shut the daemon
+ * down if required.
  *
  * Copyright (C) 2013 Philip Langdale <philipl@overt.org>
  * Copyright (C) 2013 Philipp Schmidt <philschmidt@gmx.net>
@@ -20,12 +25,13 @@
  * Boston, MA 02111-1307, USA.
  */
 
-
+#include <stdint.h>
 #include <unistd.h>
 #include <signal.h>
 #include <syslog.h>
 
 #include "udev_listener.h"
+#include "mtp_manager.h"
 
 void
 signal_handler(int sig) {
@@ -52,7 +58,7 @@ signal_handler(int sig) {
 
 int
 main(int argc, char **argv) {
-    
+
     // Set up signal handlers
     signal(SIGHUP, signal_handler);
     signal(SIGTERM, signal_handler);
@@ -60,18 +66,16 @@ main(int argc, char **argv) {
     signal(SIGQUIT, signal_handler);
     
     openlog( "LIBMTP_daemon",
-             LOG_PID | LOG_CONS | LOG_NDELAY, LOG_DAEMON );
+             LOG_PID | LOG_PERROR | LOG_NDELAY, LOG_DAEMON );
     
     syslog(LOG_INFO, "Daemoninsing");
     
-    int daemon_err = daemon(0, 0);
+//     int daemon_err = daemon(0, 0);
+//     
+//     if (daemon_err < 0)
+//         syslog(LOG_ERR, "Error daemonising");
     
-    if (daemon_err < 0)
-        syslog(LOG_ERR, "Error daemonising");
-    
-    /*
-     * Set up the actual stuff. E.g. dbus service, udev service, init connected devices (if any)
-     */
+    MTPD_start_udev_listener(device_added, device_removed);
     
     pause();
     
