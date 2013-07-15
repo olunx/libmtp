@@ -24,6 +24,8 @@
 #include <signal.h>
 #include <syslog.h>
 
+#include "udev_listener.h"
+
 void
 signal_handler(int sig) {
     
@@ -36,7 +38,8 @@ signal_handler(int sig) {
         case SIGQUIT:
             // Graceful shutdown
             
-            //TODO
+            MTPD_stop_udev_listener();
+            
             
             break;
             
