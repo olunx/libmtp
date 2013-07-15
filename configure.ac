@@ -170,6 +170,26 @@ AM_CONDITIONAL(LIBUSB0_COMPILE, test x"$found_libusb0_pkg" = "xyes")
 AM_CONDITIONAL(LIBOPENUSB_COMPILE, test x"$ac_cv_lib_openusb_openusb_init" = "xyes")
 AC_MSG_NOTICE([*** using libusb $LIBUSB_VER ***])
 
+dnl **********************
+dnl *** Check for glib ***
+dnl **********************
+AC_ARG_ENABLE(glib, AS_HELP_STRING([--disable-glib],[build without glib support]))
+msg_glib=no
+
+if test "x$enable_glib" != "xno"; then
+  PKG_CHECK_EXISTS([glib-2.0 >= 2.34], msg_glib=yes)
+
+  if test "x$msg_glib" = "xyes"; then
+    PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.34 gobject-2.0 gmodule-no-export-2.0 gio-unix-2.0 gio-2.0])
+    AC_DEFINE(HAVE_GLIB, 1, [Define to 1 if glib is available])
+  fi
+fi
+AM_CONDITIONAL(BUILD_MTPD, [test "$msg_glib" = "yes"])
+
+dnl ==========================================================================
+AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
+
+
 # Checks for header files.
 AC_HEADER_STDC
 AC_HEADER_TIME
@@ -216,6 +236,7 @@ AX_NEED_STDINT_H([src/_stdint.h])
 AC_NEED_BYTEORDER_H(src/gphoto2-endian.h)
 
 AC_CONFIG_FILES([src/libmtp.h doc/Doxyfile Makefile doc/Makefile src/Makefile
-	examples/Makefile util/Makefile libmtp.sh hotplug.sh libmtp.pc])
+	examples/Makefile util/Makefile daemon/Makefile
+	libmtp.sh hotplug.sh libmtp.pc])
 AC_OUTPUT
 chmod +x hotplug.sh
