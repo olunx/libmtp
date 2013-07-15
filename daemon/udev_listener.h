@@ -22,6 +22,8 @@
 #ifndef UDEV_LISTENER_H
 #define UDEV_LISTENER_H
 
+#include <stdint.h>
+
 /**
  * The callback type definition for the function that is called when a device is added.
  */
@@ -33,7 +35,8 @@ typedef int (* MTPD_device_added_t) (uint32_t const busid, uint32_t const devid)
 typedef int (* MTPD_device_removed_t) (uint32_t const busid, uint32_t const devid);
 
 void
-MTPD_start_udev_listener( MTPD_device_added_t const, MTPD_device_removed_t const );
+MTPD_start_udev_listener( MTPD_device_added_t const device_added_callback, MTPD_device_removed_t const device_removed_callback);
+
 void
 MTPD_stop_udev_listener();
 

@@ -28,7 +28,7 @@ $(dbus_built_sources) : Makefile.am dbus-interface.xml
 
 sbin_PROGRAMS = mtpd
 
-mtpd_SOURCES = mtpd.c
+mtpd_SOURCES = mtpd.c udev_listener.c
 mtpd_LDADD = $(libraries)
 
 # D-BUS service file

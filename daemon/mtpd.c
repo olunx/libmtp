@@ -2,6 +2,7 @@
  * \file mtpd.c
  *
  * Copyright (C) 2013 Philip Langdale <philipl@overt.org>
+ * Copyright (C) 2013 Philipp Schmidt <philschmidt@gmx.net>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
