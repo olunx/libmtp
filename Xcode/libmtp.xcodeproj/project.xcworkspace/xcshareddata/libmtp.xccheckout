@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>70DF0BC8-8DC2-4962-8196-E58928828989</string>
+	<key>IDESourceControlProjectName</key>
+	<string>libmtp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A0A70348AF94C209E8F52F4CE8B75FC1FF60793F</key>
+		<string>https://github.com/lunzii/libusb.git</string>
+		<key>C079B0BFBECAE74DF115877CC133BFB014AB3B83</key>
+		<string>https://github.com/lunzii/libmtp.git</string>
+		<key>ED79DDCB283F55C66F52D5B764862BCBD27B034B</key>
+		<string>https://github.com/lunzii/libusb-compat-0.1.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Xcode/libmtp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A0A70348AF94C209E8F52F4CE8B75FC1FF60793F</key>
+		<string>../../../../libusb</string>
+		<key>C079B0BFBECAE74DF115877CC133BFB014AB3B83</key>
+		<string>../../..</string>
+		<key>ED79DDCB283F55C66F52D5B764862BCBD27B034B</key>
+		<string>../../../../libusb-compat-0.1</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lunzii/libmtp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C079B0BFBECAE74DF115877CC133BFB014AB3B83</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C079B0BFBECAE74DF115877CC133BFB014AB3B83</string>
+			<key>IDESourceControlWCCName</key>
+			<string>libmtp</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A0A70348AF94C209E8F52F4CE8B75FC1FF60793F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>libusb</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>ED79DDCB283F55C66F52D5B764862BCBD27B034B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>libusb-compat-0.1</string>
+		</dict>
+	</array>
+</dict>
+</plist>
