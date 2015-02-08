@@ -21,13 +21,13 @@
 		C847BDC71A75057F00271179 /* unicode.h in Headers */ = {isa = PBXBuildFile; fileRef = C847BDB31A75057F00271179 /* unicode.h */; };
 		C847BDC81A75057F00271179 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = C847BDB41A75057F00271179 /* util.c */; };
 		C847BDC91A75057F00271179 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = C847BDB51A75057F00271179 /* util.h */; };
-		C847BDF11A75062A00271179 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BDE41A75062200271179 /* libusb-1.0.0.dylib */; };
+		C847BDF11A75062A00271179 /* libusb-1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BDE41A75062200271179 /* libusb-1.0.0.a */; };
 		C847BDF31A7506ED00271179 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = C847BDF21A7506ED00271179 /* config.h */; };
 		C847BDF51A75074400271179 /* libmtp.h in Headers */ = {isa = PBXBuildFile; fileRef = C847BDF41A75074400271179 /* libmtp.h */; };
 		C847BDF81A7508BA00271179 /* _stdint.h in Headers */ = {isa = PBXBuildFile; fileRef = C847BDF61A7508BA00271179 /* _stdint.h */; };
 		C847BDF91A7508BA00271179 /* gphoto2-endian.h in Headers */ = {isa = PBXBuildFile; fileRef = C847BDF71A7508BA00271179 /* gphoto2-endian.h */; };
 		C847BE011A7512F900271179 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BE001A7512F900271179 /* libiconv.dylib */; };
-		C8EB84B71A75DCC20022C2CD /* libmtp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.dylib */; };
+		C8EB84B71A75DCC20022C2CD /* libmtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.a */; };
 		C8EB84B81A75DCCD0022C2CD /* connect.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB848E1A75DC2F0022C2CD /* connect.c */; };
 		C8EB84BC1A75DE920022C2CD /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB84A61A75DC2F0022C2CD /* util.c */; };
 		C8EB84BD1A75DECC0022C2CD /* pathutils.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB849D1A75DC2F0022C2CD /* pathutils.c */; };
@@ -36,11 +36,11 @@
 		C8EB84C21A75DEFB0022C2CD /* newfolder.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB849B1A75DC2F0022C2CD /* newfolder.c */; };
 		C8EB84C31A75DEFB0022C2CD /* sendfile.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB84A11A75DC2F0022C2CD /* sendfile.c */; };
 		C8EB84C41A75DF0C0022C2CD /* sendtr.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB84A21A75DC2F0022C2CD /* sendtr.c */; };
-		C8EB84D21A75E0020022C2CD /* libmtp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.dylib */; };
+		C8EB84D21A75E0020022C2CD /* libmtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.a */; };
 		C8EB84D81A75E0280022C2CD /* files.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB84941A75DC2F0022C2CD /* files.c */; };
-		C8EB84DF1A75E0790022C2CD /* libmtp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.dylib */; };
+		C8EB84DF1A75E0790022C2CD /* libmtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.a */; };
 		C8EB84E51A75E08C0022C2CD /* albums.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB848C1A75DC2F0022C2CD /* albums.c */; };
-		C8EB84EC1A75E0DC0022C2CD /* libmtp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.dylib */; };
+		C8EB84EC1A75E0DC0022C2CD /* libmtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C847BD941A75056000271179 /* libmtp.a */; };
 		C8EB84F21A75E1180022C2CD /* playlists.c in Sources */ = {isa = PBXBuildFile; fileRef = C8EB849F1A75DC2F0022C2CD /* playlists.c */; };
 /* End PBXBuildFile section */
 
@@ -86,13 +86,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 008FC0261628BC6B00BC5BE2;
 			remoteInfo = listdevs;
-		};
-		C847BDEF1A75062700271179 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C847BDD91A75062200271179 /* libusb.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 008FBF301628B79300BC5BE2;
-			remoteInfo = libusb;
 		};
 		C8EB84B31A75DCBA0022C2CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -164,7 +157,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C847BD941A75056000271179 /* libmtp.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libmtp.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		C847BD941A75056000271179 /* libmtp.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libmtp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C847BD9D1A75057F00271179 /* chdk_live_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chdk_live_view.h; sourceTree = "<group>"; };
 		C847BD9E1A75057F00271179 /* chdk_ptp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chdk_ptp.h; sourceTree = "<group>"; };
 		C847BD9F1A75057F00271179 /* device-flags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "device-flags.h"; sourceTree = "<group>"; };
@@ -224,7 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C847BE011A7512F900271179 /* libiconv.dylib in Frameworks */,
-				C847BDF11A75062A00271179 /* libusb-1.0.0.dylib in Frameworks */,
+				C847BDF11A75062A00271179 /* libusb-1.0.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EB84B71A75DCC20022C2CD /* libmtp.dylib in Frameworks */,
+				C8EB84B71A75DCC20022C2CD /* libmtp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EB84D21A75E0020022C2CD /* libmtp.dylib in Frameworks */,
+				C8EB84D21A75E0020022C2CD /* libmtp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EB84DF1A75E0790022C2CD /* libmtp.dylib in Frameworks */,
+				C8EB84DF1A75E0790022C2CD /* libmtp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EB84EC1A75E0DC0022C2CD /* libmtp.dylib in Frameworks */,
+				C8EB84EC1A75E0DC0022C2CD /* libmtp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +274,7 @@
 		C847BD951A75056000271179 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C847BD941A75056000271179 /* libmtp.dylib */,
+				C847BD941A75056000271179 /* libmtp.a */,
 				C8EB84AC1A75DC810022C2CD /* connect */,
 				C8EB84D71A75E0020022C2CD /* files */,
 				C8EB84E41A75E0790022C2CD /* albums */,
@@ -315,7 +308,7 @@
 		C847BDDA1A75062200271179 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C847BDE41A75062200271179 /* libusb-1.0.0.dylib */,
+				C847BDE41A75062200271179 /* libusb-1.0.0.a */,
 				C847BDE61A75062200271179 /* xusb */,
 				C847BDE81A75062200271179 /* dpfp */,
 				C847BDEA1A75062200271179 /* dpfp_threaded */,
@@ -396,11 +389,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				C847BDF01A75062700271179 /* PBXTargetDependency */,
 			);
 			name = libmtp;
 			productName = libmtp;
-			productReference = C847BD941A75056000271179 /* libmtp.dylib */;
+			productReference = C847BD941A75056000271179 /* libmtp.a */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		C8EB84AB1A75DC810022C2CD /* connect */ = {
@@ -520,10 +512,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		C847BDE41A75062200271179 /* libusb-1.0.0.dylib */ = {
+		C847BDE41A75062200271179 /* libusb-1.0.0.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = "libusb-1.0.0.dylib";
+			path = "libusb-1.0.0.a";
 			remoteRef = C847BDE31A75062200271179 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -620,11 +612,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C847BDF01A75062700271179 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libusb;
-			targetProxy = C847BDEF1A75062700271179 /* PBXContainerItemProxy */;
-		};
 		C8EB84B41A75DCBA0022C2CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C847BD931A75056000271179 /* libmtp */;
@@ -728,6 +715,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				HEADER_SEARCH_PATHS = ../../libusb/libusb/;
@@ -736,6 +724,7 @@
 					"$(inherited)",
 					/Users/olunx/Documents/workspace/libusb/Xcode/build/Debug,
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -746,6 +735,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				HEADER_SEARCH_PATHS = ../../libusb/libusb/;
@@ -754,6 +744,7 @@
 					"$(inherited)",
 					/Users/olunx/Documents/workspace/libusb/Xcode/build/Debug,
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -898,6 +889,7 @@
 				C8EB84B21A75DC810022C2CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C8EB84D41A75E0020022C2CD /* Build configuration list for PBXNativeTarget "files" */ = {
 			isa = XCConfigurationList;
